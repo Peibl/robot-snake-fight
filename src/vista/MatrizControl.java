@@ -6,7 +6,7 @@ public class MatrizControl {
 	private int mat[][];
 	private Boolean estado = Boolean.TRUE;
 
-	public MatrizControl(Vivorita coor) {
+	public MatrizControl(Snake coor) {
 		this.filas = (600 / coor.getSize());
 		this.columnas = (800 / coor.getSize());
 		mat = new int[filas][columnas];
@@ -42,7 +42,7 @@ public class MatrizControl {
 		this.columnas = columnas;
 	}
 
-	public boolean Controlar(Vivorita coor) {
+	public boolean Controlar(Snake coor) {
 		int fil = coor.getY() / coor.getSize();
 		int col = coor.getX() / coor.getSize();
 

@@ -8,10 +8,10 @@ import java.awt.event.KeyListener;
 import domain.Direction;
 
 public class SnakeEvent implements KeyListener, ActionListener {
-	private Vivorita snake;
+	private Snake snake;
 	private MatrizControl matCont;
 
-	public SnakeEvent(Vivorita snake) {
+	public SnakeEvent(Snake snake) {
 		this.snake = snake;
 		matCont = new MatrizControl(snake);
 	}

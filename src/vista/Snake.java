@@ -2,7 +2,7 @@ package vista;
 
 import domain.Direction;
 
-public class Vivorita {
+public class Snake {
 	private int x;
 	private int y;
 	private int size;
@@ -16,14 +16,14 @@ public class Vivorita {
 		this.size = size;
 	}
 
-	public Vivorita() {
+	public Snake() {
 		this.setX(10);
 		this.setY(10);
 		this.setSize(10);
 		this.setDirecc(Direction.RIGHT);
 	}
 
-	public Vivorita(int x, int y, Direction direcc) {
+	public Snake(int x, int y, Direction direcc) {
 		this.setX(x);
 		this.setY(y);
 		this.setDirecc(direcc);

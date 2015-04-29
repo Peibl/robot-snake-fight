@@ -13,7 +13,7 @@ public class Vista extends JFrame implements ActionListener {
 
 	private Container container;
 	private SnakePanel snakePanel = new SnakePanel();
-	private Vivorita snake;
+	private Snake snake;
 	private SnakeEvent snakeEvents;
 	private Timer timer;
 
@@ -32,7 +32,7 @@ public class Vista extends JFrame implements ActionListener {
 		this.setContentPane(container);
 		this.setVisible(true);
 
-		snake = new Vivorita(10, 10, Direction.RIGHT);
+		snake = new Snake(10, 10, Direction.RIGHT);
 		snakeEvents = new SnakeEvent(snake);
 		this.addKeyListener(snakeEvents);
 		timer = new Timer(50, this);
@@ -44,10 +44,10 @@ public class Vista extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		snakeEvents.actionPerformed(e);
 		if (snakeEvents.Controlar()) {
-			snakePanel.setearCoor(snake);
+			snakePanel.seterSnake(snake);
 			snakePanel.repaint();
 		} else {
-			snakePanel.perdio();
+			snakePanel.lost();
 			timer.stop();
 		}
 	}

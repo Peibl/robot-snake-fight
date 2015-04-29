@@ -2,52 +2,38 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
 public class SnakePanel extends JPanel {
 
-	private Vivorita coor;
-	private boolean B;
-	private int tam = 1;
-	private BufferedImage fondo, vivora;
-	private Imagen i;
+	private Snake snake;
+	private Boolean hasToPaint;
 
 	public SnakePanel() {
 
-		B = false;
-		coor = new Vivorita();
-		// this.addMouseMotionListener(this);
+		hasToPaint = false;
+		snake = new Snake();
 		this.setBackground(Color.BLACK);
-		i = new Imagen();
 		this.setVisible(true);
-		// vivora= new Imagen().loadImg("images/tuvieja.jpg");
-		// fondo=new Imagen().loadImg("images/fondo.jpg");
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
-		// g.drawImage(fondo, 0,0, null);
-		if (B) {
+	public void paintComponent(Graphics graphic) {
+		if (hasToPaint) {
 
-			// g.drawImage(vivora, coor.getX(),coor.getY(), null);
-
-			g.fillRect(coor.getX(), coor.getY(), coor.getSize(), coor.getSize());
+			graphic.fillRect(snake.getX(), snake.getY(), snake.getSize(), snake.getSize());
 
 		}
 	}
 
-	public void setearCoor(Vivorita C) {
-		B = true;
-		coor = C;
+	public void seterSnake(Snake snake) {
+		hasToPaint = true;
+		this.snake = snake;
 
 	}
 
-	public void perdio() {
-		// coor.setX(100);
-		// coor.setY(50);
-		// fondo= i.loadImg("images/1.jpg");
+	public void lost() {
 		this.repaint();
 	}
 
