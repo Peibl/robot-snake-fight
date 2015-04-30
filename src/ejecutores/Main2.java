@@ -1,11 +1,11 @@
 package ejecutores;
 
-import vista.Vista;
+import vista.GameView;
 
 public class Main2 {
 
 	public static void main(String[] args) {
-		new Vista();
+		new GameView();
 
 	}
 }

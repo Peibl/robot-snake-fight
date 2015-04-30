@@ -52,7 +52,7 @@ public class SnakeEvent implements KeyListener, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		switch (snake.getDirecc()) {
+		switch (snake.getSnakeDirection()) {
 		case DOWN:
 			snake.setY(snake.getY() + snake.getSize());
 			break;
@@ -72,7 +72,7 @@ public class SnakeEvent implements KeyListener, ActionListener {
 
 	}
 
-	public boolean Controlar() {
+	public Boolean snakeCrash() {
 		return matCont.Controlar(snake);
 	}
 
@@ -89,18 +89,18 @@ public class SnakeEvent implements KeyListener, ActionListener {
 	}
 
 	private boolean currentDirectionIsNotLeft() {
-		return !(snake.getDirecc().equals(Direction.LEFT));
+		return !(snake.getSnakeDirection().equals(Direction.LEFT));
 	}
 
 	private boolean currentDirectionIsNotRight() {
-		return !(snake.getDirecc().equals(Direction.RIGHT));
+		return !(snake.getSnakeDirection().equals(Direction.RIGHT));
 	}
 
 	private boolean currentDirectionIsNotDown() {
-		return !(snake.getDirecc().equals(Direction.DOWN));
+		return !(snake.getSnakeDirection().equals(Direction.DOWN));
 	}
 
 	private boolean currentDirectionIsNotUp() {
-		return !(snake.getDirecc().equals(Direction.UP));
+		return !(snake.getSnakeDirection().equals(Direction.UP));
 	}
 }

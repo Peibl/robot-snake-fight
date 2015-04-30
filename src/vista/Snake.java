@@ -46,7 +46,7 @@ public class Snake {
 		this.y = y;
 	}
 
-	public Direction getDirecc() {
+	public Direction getSnakeDirection() {
 		return direcc;
 	}
 

@@ -10,10 +10,10 @@ public class MatrizControl {
 		this.filas = (600 / coor.getSize());
 		this.columnas = (800 / coor.getSize());
 		mat = new int[filas][columnas];
-		this.llenaMat();
+		this.fillMatriz();
 	}
 
-	private void llenaMat() {
+	private void fillMatriz() {
 		for (int fil = 0; fil < filas; fil++) {
 			for (int col = 0; col < columnas; col++) {
 				mat[fil][col] = 0;
@@ -52,7 +52,7 @@ public class MatrizControl {
 		} else {
 			estado = false;
 		}
-		return (estado);
+		return estado;
 	}
 
 	private int getDato(int fil, int col) {

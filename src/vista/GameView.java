@@ -9,7 +9,7 @@ import javax.swing.Timer;
 
 import domain.Direction;
 
-public class Vista extends JFrame implements ActionListener {
+public class GameView extends JFrame implements ActionListener {
 
 	private Container container;
 	private SnakePanel snakePanel = new SnakePanel();
@@ -17,9 +17,9 @@ public class Vista extends JFrame implements ActionListener {
 	private SnakeEvent snakeEvents;
 	private Timer timer;
 
-	public Vista() {
+	public GameView() {
 
-		super("Prueba grafica");
+		super("robot-snake-fight");
 
 		this.setBounds(0, 0, 810, 610);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,12 +43,12 @@ public class Vista extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		snakeEvents.actionPerformed(e);
-		if (snakeEvents.Controlar()) {
-			snakePanel.seterSnake(snake);
-			snakePanel.repaint();
-		} else {
+		if (!snakeEvents.snakeCrash()) {
 			snakePanel.lost();
 			timer.stop();
+		} else {
+			snakePanel.seterSnake(snake);
+			snakePanel.repaint();
 		}
 	}
 
