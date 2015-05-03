@@ -13,6 +13,7 @@ import controladorSocket.ControlServidor;
 
 public class PanelMenu extends JPanel implements ActionListener {
 
+	private static final long serialVersionUID = -2007438742820492340L;
 	private JButton jbCrearP = new JButton("Create Match");
 	private JButton jbUnirseP = new JButton("Join match");
 	private JButton jbConfig = new JButton("Settings");

@@ -1,33 +1,35 @@
 package controladorSocket;
 
-import socket.*;
-import vista.*;
+import socket.Servidor;
+import vista.FramePrincipal;
+import vista.PanelServidor;
+
 public class ControlServidor implements Controlador {
 	private Servidor server;
 	private PanelServidor panel;
 	private Thread thread;
-	private FramePrincipal fm;
 
-	public ControlServidor(FramePrincipal fm){
-		//super();
-		this.fm=fm;
-		panel= new PanelServidor(this);
+	public ControlServidor(FramePrincipal fm) {
+		panel = new PanelServidor(this);
 
 		fm.setPp(panel);
 
-
 	}
-	public void CrearSocket(){
-		server=new Servidor ( panel.getPanelConfigServidor().getDc(),panel.getPanelChat());
+
+	@Override
+	public void CrearSocket() {
+		server = new Servidor(panel.getPanelConfigServidor().getDc(),
+				panel.getPanelChat());
 		panel.getPanelChat().setClienteServidor(server);
-		thread= new Thread(server);
+		thread = new Thread(server);
 		thread.start();
 
 	}
+
+	@Override
 	public void DetenerSocket() {
 		// TODO Auto-generated method stub
 		thread.stop();
 	}
-
 
 }

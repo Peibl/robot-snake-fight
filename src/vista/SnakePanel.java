@@ -7,34 +7,31 @@ import javax.swing.JPanel;
 
 public class SnakePanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2721705475191274007L;
 	private Snake snake;
-	private Boolean hasToPaint;
 
-	public SnakePanel() {
+	public SnakePanel(Snake snake) {
 
-		hasToPaint = false;
-		snake = new Snake();
+		this.snake = snake;
 		this.setBackground(Color.BLACK);
 		this.setVisible(true);
 	}
 
 	@Override
 	public void paintComponent(Graphics graphic) {
-		if (hasToPaint) {
 
-			graphic.fillRect(snake.getX(), snake.getY(), snake.getSize(), snake.getSize());
+		graphic.setColor(Color.BLUE);
+		graphic.fillRect(snake.getX(), snake.getY(), snake.getSize(),
+				snake.getSize());
 
-		}
 	}
 
-	public void seterSnake(Snake snake) {
-		hasToPaint = true;
+	public void updateSnakeLocation(Snake snake) {
 		this.snake = snake;
 
-	}
-
-	public void lost() {
-		this.repaint();
 	}
 
 }

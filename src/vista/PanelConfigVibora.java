@@ -1,43 +1,44 @@
 package vista;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.util.Hashtable;
 
-
-public class PanelConfigVibora extends JPanel implements ActionListener, ChangeListener {
+public class PanelConfigVibora extends JPanel implements ActionListener,
+		ChangeListener {
+	private static final long serialVersionUID = -7990237998381926588L;
 	private ButtonGroup bgSonido = new ButtonGroup();
 	private ButtonGroup bgTeclas = new ButtonGroup();
 	private JRadioButton rbSOn = new JRadioButton("On", true);
 	private JRadioButton rbSOff = new JRadioButton("Off", false);
 	private JRadioButton rbTeclas1 = new JRadioButton("Flechas", true);
 	private JRadioButton rbTeclas2 = new JRadioButton("WASD", false);
-	private JLabel jlSonido = new JLabel ("Sonido");
-	private JLabel jlTeclas = new JLabel ("Teclas");
+	private JLabel jlSonido = new JLabel("Sonido");
+	private JLabel jlTeclas = new JLabel("Teclas");
 	private JLabel jlBug1 = new JLabel();
 	private JLabel jlBug2 = new JLabel();
-	private JButton jbCred = new JButton ("Créditos");
-	private JButton jbInstru = new JButton ("Instrucciones");
-	private JButton jbVolver = new JButton ("Volver");
+	private JButton jbCred = new JButton("Crï¿½ditos");
+	private JButton jbInstru = new JButton("Instrucciones");
+	private JButton jbVolver = new JButton("Volver");
 	private JSlider jS = new JSlider(JSlider.HORIZONTAL, 0, 10, 5);
-	private FramePrincipal fm;
 
-	public PanelConfigVibora(FramePrincipal fm){
+	public PanelConfigVibora() {
 
-		this.fm = fm;
-		this.setLayout(new GridLayout(4,3, 0, 20));
+		this.setLayout(new GridLayout(4, 3, 0, 20));
 
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
 		labelTable.put(0, new JLabel("facil"));
-		labelTable.put(5, new JLabel ("moderado"));
+		labelTable.put(5, new JLabel("moderado"));
 		labelTable.put(10, new JLabel("dificil"));
 
 		jS.addChangeListener(this);
@@ -53,10 +54,7 @@ public class PanelConfigVibora extends JPanel implements ActionListener, ChangeL
 		bgTeclas.add(rbTeclas1);
 		bgTeclas.add(rbTeclas2);
 
-
 		jbVolver.addActionListener(this);
-
-
 
 		this.add(jlSonido);
 		this.add(rbSOn);
@@ -71,52 +69,51 @@ public class PanelConfigVibora extends JPanel implements ActionListener, ChangeL
 		this.add(jbCred);
 		this.add(jbVolver);
 
-
 		this.setVisible(true);
 
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == jbVolver){
+		if (e.getSource() == jbVolver) {
 
 		}
 
-		if (e.getSource() == rbSOn){
+		if (e.getSource() == rbSOn) {
 
 		}
 
-		if (e.getSource() == rbSOff){
+		if (e.getSource() == rbSOff) {
 
 		}
 
-		if (e.getSource() == rbTeclas1){
+		if (e.getSource() == rbTeclas1) {
 
 		}
 
-		if (e.getSource() == rbTeclas2){
+		if (e.getSource() == rbTeclas2) {
 
 		}
 
-		if (e.getSource() == jbInstru){
+		if (e.getSource() == jbInstru) {
 
 		}
 
-		if (e.getSource() == jbCred){
+		if (e.getSource() == jbCred) {
 
 		}
 
 	}
 
+	@Override
 	public void stateChanged(ChangeEvent e) {
 		JSlider source = (JSlider) e.getSource();
-		//Imprime cada vez que cambia de valor el JSlider
-		if (!source.getValueIsAdjusting()){
+		// Imprime cada vez que cambia de valor el JSlider
+		if (!source.getValueIsAdjusting()) {
 			int fps = source.getValue();
-				System.out.println(fps);
+			System.out.println(fps);
 		}
 
 	}
-
-
 
 }

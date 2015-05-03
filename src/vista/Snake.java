@@ -6,7 +6,7 @@ public class Snake {
 	private int x;
 	private int y;
 	private int size;
-	private Direction direcc;
+	private Direction direction;
 
 	public int getSize() {
 		return size;
@@ -16,17 +16,10 @@ public class Snake {
 		this.size = size;
 	}
 
-	public Snake() {
-		this.setX(10);
-		this.setY(10);
-		this.setSize(10);
-		this.setDirecc(Direction.RIGHT);
-	}
-
 	public Snake(int x, int y, Direction direcc) {
 		this.setX(x);
 		this.setY(y);
-		this.setDirecc(direcc);
+		this.setDirection(direcc);
 		this.setSize(10);
 	}
 
@@ -47,11 +40,11 @@ public class Snake {
 	}
 
 	public Direction getSnakeDirection() {
-		return direcc;
+		return direction;
 	}
 
-	public void setDirecc(Direction direcc) {
-		this.direcc = direcc;
+	public void setDirection(Direction direction) {
+		this.direction = direction;
 	}
 
 }
