@@ -1,9 +1,11 @@
 package ejecutores;
-import vista.*;
+
+import vista.FramePrincipal;
+
 public class Main {
 
 	public static void main(String[] args) {
-		FramePrincipal fm=new FramePrincipal();
+		new FramePrincipal();
 	}
 
 }

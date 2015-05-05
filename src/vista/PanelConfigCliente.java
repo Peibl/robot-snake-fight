@@ -1,33 +1,20 @@
 package vista;
 
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import socket.DatosClienteServidor;
+import controladorSocket.ControlCliente;
 
-import controladorSocket.*;
+public class PanelConfigCliente extends PanelConfig {
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import socket.*;
+	private static final long serialVersionUID = 1813774215670904398L;
 
-public class PanelConfigCliente extends PanelConfig  {
-
-
-	private ControlCliente mc;
-
-
-	public PanelConfigCliente(ControlCliente cc){
+	public PanelConfigCliente(ControlCliente cc) {
 		super(cc);
 		this.setTextoJbConectar("Conectar");
 		this.setVisible(true);
 
-
 	}
 
-
+	@Override
 	public DatosClienteServidor getDc() {
 		return dc;
 	}

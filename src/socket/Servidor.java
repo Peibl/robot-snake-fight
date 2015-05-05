@@ -1,182 +1,185 @@
-// Configurar un servidor que reciba una conexión de un cliente, envíe
-// una cadena al cliente y cierre la conexión.
+// Configurar un servidor que reciba una conexiï¿½n de un cliente, envï¿½e
+// una cadena al cliente y cierre la conexiï¿½n.
 package socket;
 
-import java.io.*;
-import java.net.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-import vista.*;
+import vista.PanelChat;
 
-public class Servidor  implements ClienteServidor,Runnable{
+public class Servidor implements ClienteServidor, Runnable {
 
-   private ObjectOutputStream salida;
-   private ObjectInputStream entrada;
-   private ServerSocket servidor;
-   private Socket conexion;
-   private int contador = 1;
-   private PanelChat panel;
-   private DatosClienteServidor dc;
+	private ObjectOutputStream salida;
+	private ObjectInputStream entrada;
+	private ServerSocket servidor;
+	private Socket conexion;
+	private int contador = 1;
+	private PanelChat panel;
+	private DatosClienteServidor dc;
 
-   public Servidor( DatosClienteServidor dc,PanelChat panel)
-   {
-	   this.panel=panel;
-	   this.dc=dc;
+	public Servidor(DatosClienteServidor dc, PanelChat panel) {
+		this.panel = panel;
+		this.dc = dc;
 
-   } // fin del constructor de Servidor
+	} // fin del constructor de Servidor
 
-   // configurar y ejecutar el servidor
-   public void ejecutar()
-   {
-      // configurar servidor para que reciba conexiones; procesar las conexiones
-      try {
+	// configurar y ejecutar el servidor
+	@Override
+	public void ejecutar() {
+		// configurar servidor para que reciba conexiones; procesar las
+		// conexiones
+		try {
 
-         // Paso 1: crear un objeto ServerSocket.
-         servidor = new ServerSocket( dc.getPuerto(),100 );
+			// Paso 1: crear un objeto ServerSocket.
+			servidor = new ServerSocket(dc.getPuerto(), 100);
 
+			while (true) {
 
+				try {
+					esperarConexion(); // Paso 2: esperar una conexiï¿½n.
+					obtenerFlujos(); // Paso 3: obtener flujos de entrada y
+										// salida.
+					procesarConexion(); // Paso 4: procesar la conexiï¿½n.
+				}
 
-         while ( true ) {
+				// procesar excepciï¿½n EOFException cuando el cliente cierre la
+				// conexiï¿½n
+				catch (EOFException excepcionEOF) {
+					System.err.println("El servidor terminï¿½ la conexiï¿½n");
+				}
 
-            try {
-               esperarConexion(); // Paso 2: esperar una conexión.
-               obtenerFlujos();        // Paso 3: obtener flujos de entrada y salida.
-               procesarConexion(); // Paso 4: procesar la conexión.
-            }
+				finally {
+					cerrarConexion(); // Paso 5: cerrar la conexiï¿½n.
+					++contador;
+				}
 
-            // procesar excepción EOFException cuando el cliente cierre la conexión
-            catch ( EOFException excepcionEOF ) {
-               System.err.println( "El servidor terminó la conexión" );
-            }
+			} // fin de instrucciï¿½n while
 
-            finally {
-               cerrarConexion();   // Paso 5: cerrar la conexión.
-               ++contador;
-            }
+		} // fin del bloque try
 
-         } // fin de instrucción while
+		// procesar problemas con E/S
+		catch (IOException excepcionES) {
+			excepcionES.printStackTrace();
+		}
 
-      } // fin del bloque try
+	} // fin del mï¿½todo ejecutarServidor
 
-      // procesar problemas con E/S
-      catch ( IOException excepcionES ) {
-         excepcionES.printStackTrace();
-      }
+	// esperar que la conexiï¿½n llegue, despuï¿½s mostrar informaciï¿½n de la
+	// conexiï¿½n
+	private void esperarConexion() throws IOException {
+		mostrarMensaje("Esperando una conexiï¿½n\n");
+		conexion = servidor.accept(); // permitir al servidor aceptar la
+										// conexiï¿½n
 
-   } // fin del método ejecutarServidor
+		mostrarMensaje("Conexiï¿½n " + contador + " recibida de: "
+				+ conexion.getInetAddress().getHostName());
+	}
 
-   // esperar que la conexión llegue, después mostrar información de la conexión
-   private void esperarConexion() throws IOException
-   {
-      mostrarMensaje( "Esperando una conexión\n" );
-      conexion = servidor.accept(); // permitir al servidor aceptar la conexión
+	// obtener flujos para enviar y recibir datos
+	@Override
+	public void obtenerFlujos() throws IOException {
+		// establecer flujo de salida para los objetos
+		salida = new ObjectOutputStream(conexion.getOutputStream());
+		salida.flush(); // vaciar bï¿½fer de salida para enviar informaciï¿½n de
+						// encabezado
 
-      mostrarMensaje( "Conexión " + contador + " recibida de: " +
-         conexion.getInetAddress().getHostName() );
-   }
+		// establecer flujo de entrada para los objetos
+		entrada = new ObjectInputStream(conexion.getInputStream());
 
-   // obtener flujos para enviar y recibir datos
-   public void obtenerFlujos() throws IOException
-   {
-      // establecer flujo de salida para los objetos
-      salida = new ObjectOutputStream( conexion.getOutputStream() );
-      salida.flush(); // vaciar búfer de salida para enviar información de encabezado
+		mostrarMensaje("\nSe recibieron los flujos de E/S\n");
+	}
 
-      // establecer flujo de entrada para los objetos
-      entrada = new ObjectInputStream( conexion.getInputStream() );
+	// procesar la conexiï¿½n con el cliente
+	@Override
+	public void procesarConexion() throws IOException {
+		// enviar mensaje de conexiï¿½n exitosa al cliente
+		String mensaje = "Conexiï¿½n exitosa";
+		panel.setCampIntr(true);
 
-      mostrarMensaje( "\nSe recibieron los flujos de E/S\n" );
-   }
+		enviarDatos(mensaje);
 
-   // procesar la conexión con el cliente
-   public void procesarConexion() throws IOException
-   {
-      // enviar mensaje de conexión exitosa al cliente
-      String mensaje = "Conexión exitosa";
-      panel.setCampIntr(true);
+		// habilitar campoIntroducir para que el usuario del servidor pueda
+		// enviar mensajes
+		// establecerCampoTextoEditable( true );
 
-      enviarDatos( mensaje );
+		do { // procesar los mensajes enviados por el cliente
 
-      // habilitar campoIntroducir para que el usuario del servidor pueda enviar mensajes
-      //establecerCampoTextoEditable( true );
+			// leer el mensaje y mostrarlo en pantalla
+			try {
+				mensaje = (String) entrada.readObject();
+				mostrarMensaje("\n" + mensaje);
+			}
 
-      do { // procesar los mensajes enviados por el cliente
+			// atrapar problemas que pueden ocurrir al tratar de leer del
+			// cliente
+			catch (ClassNotFoundException excepcionClaseNoEncontrada) {
+				mostrarMensaje("\nSe recibiï¿½ un tipo de objeto desconocido");
+			}
 
-         // leer el mensaje y mostrarlo en pantalla
-         try {
-            mensaje = ( String ) entrada.readObject();
-            mostrarMensaje( "\n" + mensaje );
-         }
+		} while (!mensaje.equals("CLIENTE>>> TERMINAR"));
 
-         // atrapar problemas que pueden ocurrir al tratar de leer del cliente
-         catch ( ClassNotFoundException excepcionClaseNoEncontrada ) {
-            mostrarMensaje( "\nSe recibió un tipo de objeto desconocido" );
-         }
+	} // fin del mï¿½todo procesarConexion
 
-      } while ( !mensaje.equals( "CLIENTE>>> TERMINAR" ) );
+	// cerrar flujos y socket
+	@Override
+	public void cerrarConexion() {
+		mostrarMensaje("\nFinalizando la conexiï¿½n\n");
+		// establecerCampoTextoEditable( false ); // deshabilitar
+		// campoIntroducir
 
-   } // fin del método procesarConexion
+		try {
+			salida.close();
+			entrada.close();
+			conexion.close();
+		} catch (IOException excepcionES) {
+			excepcionES.printStackTrace();
+		}
+	}
 
-   // cerrar flujos y socket
-   public void cerrarConexion()
-   {
-      mostrarMensaje( "\nFinalizando la conexión\n" );
-     // establecerCampoTextoEditable( false ); // deshabilitar campoIntroducir
+	// enviar mensaje al cliente
+	@Override
+	public void enviarDatos(Object mensaje) {
+		// enviar objeto al cliente
+		try {
+			salida.writeObject(dc.getNick() + "(servidor)>>> " + mensaje);
+			salida.flush();
+			mostrarMensaje("\n" + dc.getNick() + "(servidor)>>> " + mensaje);
+		}
 
-      try {
-         salida.close();
-         entrada.close();
-         conexion.close();
-      }
-      catch( IOException excepcionES ) {
-         excepcionES.printStackTrace();
-      }
-   }
+		// procesar problemas que pueden ocurrir al enviar el objeto
+		catch (IOException excepcionES) {
+			// frame.areaPantalla.append( "\nError al escribir objeto" );
+		}
+	}
 
-   // enviar mensaje al cliente
-   public void enviarDatos( Object mensaje )
-   {
-      // enviar objeto al cliente
-      try {
-         salida.writeObject( dc.getNick()+"(servidor)>>> " + mensaje );
-         salida.flush();
-         mostrarMensaje( "\n"+dc.getNick()+"(servidor)>>> " + mensaje );
-      }
+	// mï¿½todo utilitario que es llamado desde otros subprocesos para manipular a
+	// areaPantalla en el subproceso despachador de eventos
+	@Override
+	public void mostrarMensaje(final String mensajeAMostrar) {
+		// mostrar mensaje del subproceso de ejecuciï¿½n despachador de eventos
+		// SwingUtilities.invokeLater(
+		// new Runnable() { // clase interna para asegurar que la GUI se
+		// actualice apropiadamente
 
-      // procesar problemas que pueden ocurrir al enviar el objeto
-      catch ( IOException excepcionES ) {
-        // frame.areaPantalla.append( "\nError al escribir objeto" );
-      }
-   }
+		// public void run() // actualiza areaPantalla
+		// {
+		panel.setAreaPantalla(mensajeAMostrar);
+		// }
 
-   // método utilitario que es llamado desde otros subprocesos para manipular a
-   // areaPantalla en el subproceso despachador de eventos
-   public void mostrarMensaje( final String mensajeAMostrar )
-   {
-      // mostrar mensaje del subproceso de ejecución despachador de eventos
-     // SwingUtilities.invokeLater(
-         //new Runnable() {  // clase interna para asegurar que la GUI se actualice apropiadamente
+		// } // fin de la clase interna
 
-            //public void run() // actualiza areaPantalla
-            //{
-            	 panel.setAreaPantalla(mensajeAMostrar);
-          //  }
+		// ); // fin de la llamada a SwingUtilities.invokeLater
+	}
 
-        // }  // fin de la clase interna
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		this.ejecutar();
 
-      //); // fin de la llamada a SwingUtilities.invokeLater
-   }
+	}
 
-
-
-public void run() {
-	// TODO Auto-generated method stub
-	this.ejecutar();
-
-}
-
-
-
-}  // fin de la clase Servidor
+} // fin de la clase Servidor

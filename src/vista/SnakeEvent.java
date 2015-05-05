@@ -22,26 +22,26 @@ public class SnakeEvent implements KeyListener, ActionListener {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_DOWN:
 			if (currentDirectionIsNotUp()) {
-				snake.setDirecc(Direction.DOWN);
+				snake.setDirection(Direction.DOWN);
 			}
 
 			break;
 		case KeyEvent.VK_UP:
 			if (currentDirectionIsNotDown()) {
-				snake.setDirecc(Direction.UP);
+				snake.setDirection(Direction.UP);
 			}
 
 			break;
 		case KeyEvent.VK_LEFT:
 
 			if (currentDirectionIsNotRight()) {
-				snake.setDirecc(Direction.LEFT);
+				snake.setDirection(Direction.LEFT);
 			}
 			break;
 		case KeyEvent.VK_RIGHT:
 
 			if (currentDirectionIsNotLeft()) {
-				snake.setDirecc(Direction.RIGHT);
+				snake.setDirection(Direction.RIGHT);
 			}
 
 			break;

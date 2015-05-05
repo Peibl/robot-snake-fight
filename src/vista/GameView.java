@@ -11,8 +11,11 @@ import domain.Direction;
 
 public class GameView extends JFrame implements ActionListener {
 
-	private Container container;
-	private SnakePanel snakePanel = new SnakePanel();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2093811644869322876L;
+	private SnakePanel snakePanel;
 	private Snake snake;
 	private SnakeEvent snakeEvents;
 	private Timer timer;
@@ -24,15 +27,16 @@ public class GameView extends JFrame implements ActionListener {
 		this.setBounds(0, 0, 810, 610);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		container = this.getContentPane();
+		Container container = this.getContentPane();
 		container.setLayout(null);
-		snakePanel.setBounds(0, 0, 810, 610);
-		container.add(snakePanel);
-
-		this.setContentPane(container);
-		this.setVisible(true);
 
 		snake = new Snake(10, 10, Direction.RIGHT);
+		snakePanel = new SnakePanel(snake);
+		snakePanel.setBounds(0, 0, 810, 610);
+
+		container.add(snakePanel);
+		this.setContentPane(container);
+		this.setVisible(true);
 		snakeEvents = new SnakeEvent(snake);
 		this.addKeyListener(snakeEvents);
 		timer = new Timer(50, this);
@@ -44,10 +48,9 @@ public class GameView extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		snakeEvents.actionPerformed(e);
 		if (!snakeEvents.snakeCrash()) {
-			snakePanel.lost();
 			timer.stop();
 		} else {
-			snakePanel.seterSnake(snake);
+			snakePanel.updateSnakeLocation(snake);
 			snakePanel.repaint();
 		}
 	}
