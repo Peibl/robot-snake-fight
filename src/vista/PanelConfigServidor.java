@@ -3,7 +3,7 @@ package vista;
 import java.io.IOException;
 import java.net.InetAddress;
 
-import controladorSocket.ControlServidor;
+import controlador.socket.ControlServidor;
 
 public class PanelConfigServidor extends PanelConfig {
 

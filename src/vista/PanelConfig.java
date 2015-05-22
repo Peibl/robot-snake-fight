@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import socket.DatosClienteServidor;
-import controladorSocket.Controlador;
+import controlador.socket.Controlador;
 
 @SuppressWarnings("serial")
 public class PanelConfig extends JPanel implements ActionListener {

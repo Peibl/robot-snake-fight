@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controladorSocket.ControlCliente;
-import controladorSocket.ControlServidor;
+import controlador.socket.ControlCliente;
+import controlador.socket.ControlServidor;
 
 public class PanelMenu extends JPanel implements ActionListener {
 

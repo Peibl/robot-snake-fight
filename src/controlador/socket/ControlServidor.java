@@ -1,4 +1,4 @@
-package controladorSocket;
+package controlador.socket;
 
 import socket.Servidor;
 import vista.FramePrincipal;

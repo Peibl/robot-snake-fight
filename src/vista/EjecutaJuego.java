@@ -3,7 +3,7 @@ package vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controladorSocket.Controlador;
+import controlador.socket.Controlador;
 
 class EjecutaJuego implements ActionListener {
 	PanelConfig pc;

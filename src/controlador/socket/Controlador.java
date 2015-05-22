@@ -1,4 +1,4 @@
-package controladorSocket;
+package controlador.socket;
 
 public interface Controlador {
 	public void CrearSocket();

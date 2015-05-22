@@ -4,7 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import controladorSocket.ControlServidor;
+import controlador.socket.ControlServidor;
 
 public class PanelServidor extends JPanel {
 	/**

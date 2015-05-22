@@ -1,7 +1,7 @@
 package vista;
 
 import socket.DatosClienteServidor;
-import controladorSocket.ControlCliente;
+import controlador.socket.ControlCliente;
 
 public class PanelConfigCliente extends PanelConfig {
 
