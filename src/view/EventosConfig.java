@@ -1,4 +1,4 @@
-package vista;
+package view;
 
 import javax.swing.JPanel;
 
@@ -10,16 +10,14 @@ public class EventosConfig {
 
 	public EventosConfig(PanelConfig datos) {
 		this.datos = datos;
-		if (!(datos.tfNick.getText().matches("[a-zA-Z_0-9]*")
-				&& datos.tfNick.getText().length() >= 4 && datos.tfNick
-				.getText().length() <= 10)) {
+		if (!(datos.tfNick.getText().matches("[a-zA-Z_0-9]*") && datos.tfNick.getText().length() >= 4
+				&& datos.tfNick.getText().length() <= 10)) {
 			valido = false;
 		} else {
 			if (datos.tfIP.getText() == "") {
 				valido = false;
 			} else {
-				if (datos.tfPuerto.getText().length() == 4
-						|| datos.tfPuerto.getText().length() == 5) {
+				if (datos.tfPuerto.getText().length() == 4 || datos.tfPuerto.getText().length() == 5) {
 					try {
 						// si no se puede castear implica que no es un puerto
 						// valido

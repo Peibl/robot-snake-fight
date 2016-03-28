@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import vista.PanelChat;
+import view.PanelChat;
 
 public class Cliente implements ClienteServidor, Runnable {
 

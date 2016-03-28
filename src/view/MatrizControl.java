@@ -1,4 +1,4 @@
-package vista;
+package view;
 
 public class MatrizControl {
 	private int filas;

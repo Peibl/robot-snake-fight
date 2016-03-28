@@ -1,8 +1,8 @@
-package ejecutores;
+package launcher;
 
-import vista.GameView;
+import view.GameView;
 
-public class Main2 {
+public class GameViewMain {
 
 	public static void main(String[] args) {
 		new GameView();

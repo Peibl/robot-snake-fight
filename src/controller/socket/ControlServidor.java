@@ -1,8 +1,8 @@
-package controlador.socket;
+package controller.socket;
 
 import socket.Servidor;
-import vista.FramePrincipal;
-import vista.PanelServidor;
+import view.FramePrincipal;
+import view.PanelServidor;
 
 public class ControlServidor implements Controlador {
 	private Servidor server;
@@ -18,8 +18,7 @@ public class ControlServidor implements Controlador {
 
 	@Override
 	public void CrearSocket() {
-		server = new Servidor(panel.getPanelConfigServidor().getDc(),
-				panel.getPanelChat());
+		server = new Servidor(panel.getPanelConfigServidor().getDc(), panel.getPanelChat());
 		panel.getPanelChat().setClienteServidor(server);
 		thread = new Thread(server);
 		thread.start();

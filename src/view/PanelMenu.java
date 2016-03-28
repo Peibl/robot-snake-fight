@@ -1,4 +1,4 @@
-package vista;
+package view;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controlador.socket.ControlCliente;
-import controlador.socket.ControlServidor;
+import controller.socket.ControlCliente;
+import controller.socket.ControlServidor;
 
 public class PanelMenu extends JPanel implements ActionListener {
 

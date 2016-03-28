@@ -1,4 +1,4 @@
-package vista;
+package view;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,8 +14,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class PanelConfigVibora extends JPanel implements ActionListener,
-		ChangeListener {
+public class PanelConfigVibora extends JPanel implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = -7990237998381926588L;
 	private ButtonGroup bgSonido = new ButtonGroup();
 	private ButtonGroup bgTeclas = new ButtonGroup();

@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import vista.PanelChat;
+import view.PanelChat;
 
 public class Servidor implements ClienteServidor, Runnable {
 

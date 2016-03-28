@@ -1,8 +1,8 @@
-package controlador.socket;
+package controller.socket;
 
 import socket.Cliente;
-import vista.FramePrincipal;
-import vista.PanelCliente;
+import view.FramePrincipal;
+import view.PanelCliente;
 
 public class ControlCliente implements Controlador {
 	private Cliente cliente;
@@ -19,8 +19,7 @@ public class ControlCliente implements Controlador {
 	@Override
 	public void CrearSocket() {
 		// TODO Auto-generated method stub
-		cliente = new Cliente(panel.getPanelConfigCliente().getDc(),
-				panel.getPanelChat());
+		cliente = new Cliente(panel.getPanelConfigCliente().getDc(), panel.getPanelChat());
 		panel.getPanelChat().setClienteServidor(cliente);
 		thread = new Thread(cliente);
 		thread.start();

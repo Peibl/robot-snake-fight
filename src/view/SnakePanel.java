@@ -1,4 +1,4 @@
-package vista;
+package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -24,8 +24,7 @@ public class SnakePanel extends JPanel {
 	public void paintComponent(Graphics graphic) {
 
 		graphic.setColor(Color.BLUE);
-		graphic.fillRect(snake.getX(), snake.getY(), snake.getSize(),
-				snake.getSize());
+		graphic.fillRect(snake.getX(), snake.getY(), snake.getSize(), snake.getSize());
 
 	}
 

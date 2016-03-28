@@ -1,4 +1,4 @@
-package vista;
+package view;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,8 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.socket.Controlador;
 import socket.DatosClienteServidor;
-import controlador.socket.Controlador;
 
 @SuppressWarnings("serial")
 public class PanelConfig extends JPanel implements ActionListener {

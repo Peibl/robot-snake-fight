@@ -1,9 +1,9 @@
-package vista;
+package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controlador.socket.Controlador;
+import controller.socket.Controlador;
 
 class EjecutaJuego implements ActionListener {
 	PanelConfig pc;

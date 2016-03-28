@@ -1,9 +1,9 @@
-package vista;
+package view;
 
 import java.io.IOException;
 import java.net.InetAddress;
 
-import controlador.socket.ControlServidor;
+import controller.socket.ControlServidor;
 
 public class PanelConfigServidor extends PanelConfig {
 

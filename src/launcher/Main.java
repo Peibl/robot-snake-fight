@@ -1,6 +1,6 @@
-package ejecutores;
+package launcher;
 
-import vista.FramePrincipal;
+import view.FramePrincipal;
 
 public class Main {
 

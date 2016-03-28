@@ -1,10 +1,10 @@
-package vista;
+package view;
 
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import controlador.socket.ControlCliente;
+import controller.socket.ControlCliente;
 
 public class PanelCliente extends JPanel {
 
