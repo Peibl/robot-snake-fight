@@ -4,8 +4,7 @@ import view.GameView;
 
 public class GameViewMain {
 
-	public static void main(String[] args) {
-		new GameView();
-
-	}
+    public static void main(String[] args) {
+        new GameView();
+    }
 }
