@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 public class FramePrincipal extends JFrame {
 	private static final long serialVersionUID = 5103527867993342297L;
-	private Container c;
+	private final Container c;
 	private JPanel pp;
 
 	public FramePrincipal() {
@@ -24,10 +24,6 @@ public class FramePrincipal extends JFrame {
 
 	}
 
-	public JPanel getPp() {
-		return pp;
-	}
-
 	public void setPp(JPanel pp) {
 		c.remove(this.pp);
 		this.pp = pp;
@@ -35,10 +31,8 @@ public class FramePrincipal extends JFrame {
 	}
 
 	private void AddPanel(JPanel pp) {
-
 		this.pp = pp;
 		c.add(pp, BorderLayout.CENTER);
 		this.setContentPane(c);
-
 	}
 }

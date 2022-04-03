@@ -51,24 +51,19 @@ public class PanelMenu extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == jbConfig) {
-
+			System.out.println("Config");
 		}
-
 		if (e.getSource() == jbSalir) {
 			System.exit(0);
 		}
-
 		if (e.getSource() == jbCrearP) {
 			System.out.println("Crea Partida");
 			new ControlServidor(fm);
 
 		}
 		if (e.getSource() == jbUnirseP) {
-			System.out.println("Crea Partida");
+			System.out.println("Unirse Partida");
 			new ControlCliente(fm);
-
 		}
-
 	}
-
 }

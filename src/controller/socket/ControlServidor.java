@@ -11,9 +11,7 @@ public class ControlServidor implements Controlador {
 
 	public ControlServidor(FramePrincipal fm) {
 		panel = new PanelServidor(this);
-
 		fm.setPp(panel);
-
 	}
 
 	@Override

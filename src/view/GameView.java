@@ -10,10 +10,6 @@ import javax.swing.Timer;
 import domain.Direction;
 
 public class GameView extends JFrame implements ActionListener {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2093811644869322876L;
 	private SnakePanel snakePanel;
 	private Snake snake;
@@ -41,7 +37,6 @@ public class GameView extends JFrame implements ActionListener {
 		this.addKeyListener(snakeEvents);
 		timer = new Timer(50, this);
 		timer.start();
-
 	}
 
 	@Override
